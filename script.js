@@ -1,20 +1,30 @@
-//your JS code here. If required.
 function lazyLoadImages() {
-  const lazyImages = document.querySelectorAll('img.lazy');
+  const images = document.querySelectorAll("img.lazy");
 
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+
         const img = entry.target;
 
         img.src = img.dataset.src;
 
-        obs.unobserve(img);
-      }
-    });
-  });
+        img.onload = () => {
+          img.setAttribute("data-loaded", "true");
+        };
 
-  lazyImages.forEach(img => observer.observe(img));
+        obs.unobserve(img);
+      });
+    },
+    {
+      root: null,
+      rootMargin: "300px",
+      threshold: 0.01
+    }
+  );
+
+  images.forEach(img => observer.observe(img));
 }
 
 document.addEventListener("DOMContentLoaded", lazyLoadImages);
