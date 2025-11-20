@@ -7,8 +7,11 @@ function lazyLoadImages() {
         if (!entry.isIntersecting) return;
 
         const img = entry.target;
+
         img.src = img.dataset.src;
+
         img.onload = () => img.setAttribute("data-loaded", "true");
+
         obs.unobserve(img);
       });
     },

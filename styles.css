@@ -1,12 +1,11 @@
-/*  your css code here. If applicable */
 body {
-    min-height: 3000px;
+	min-height: 4000px; 
 }
 
 img.lazy {
     display: block;
-    margin: 50px auto; 
-    width: 200px;
-    height: 150px;
+    margin: 50px auto;
+    width: 300px;
+    height: 200px;
     background: #eee; 
 }
